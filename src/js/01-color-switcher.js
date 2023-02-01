@@ -6,6 +6,10 @@ const btnStartEl = document.querySelector('[data-start]');
 const btnStopEl = document.querySelector('[data-stop]');
 const bodyEl = document.querySelector('body');
 
+btnStopEl.setAttribute('disabled', true);
+
+
+
 let timerId = null;
 
 btnStartEl.addEventListener('click', onBtnStartClick);
@@ -16,6 +20,9 @@ function onBtnStartClick(e) {
     timerId = setInterval(() => {
         bodyEl.style.backgroundColor = getRandomHexColor();
     }, 1000);
+
+    btnStartEl.setAttribute('disabled', false);
+    btnStopEl.removeAttribute('disabled');
 
 
 };
@@ -29,6 +36,8 @@ function onBtnStopClick(e) {
     console.log('!!!!')
     clearInterval(timerId);
 
+    btnStartEl.removeAttribute('disabled');
+    btnStopEl.setAttribute('disabled', true);
 };
 
 
