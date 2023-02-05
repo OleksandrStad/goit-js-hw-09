@@ -3,7 +3,6 @@ import 'flatpickr/dist/flatpickr.min.css';
 
 const inputDateEl = document.getElementById('datetime-picker');
 const btnStartEl = document.querySelector('[data-start]');
-
 const refField = {
     days: document.querySelector('[data-days]'),
     hours: document.querySelector('[data-hours]'),
@@ -14,13 +13,9 @@ const refField = {
 let selectedTime;
 
 btnStartEl.setAttribute('disabled', false);
-
 btnStartEl.addEventListener('click', () => {
     start(selectedTime)
-
-})
-
-
+});
 
 const options = {
     enableTime: true,
@@ -40,24 +35,20 @@ const options = {
 
 const calendar = flatpickr(inputDateEl, options);
 
-
-
-
 function start() {
     const timeId = setInterval(countTime, 1000);
 
     function countTime() {
-        // console.log('kbnmv')
+
         const currentTime = Date.now();
         const deltaTime = selectedTime - currentTime;
-        // console.log(deltaTime);
 
         const { days, hours, minutes, seconds } = convertMs(deltaTime);
         if (currentTime >= selectedTime) {
             clearInterval(timeId);
             return;
-        }
-        // console.log(timeComponents);
+        };
+
         refField.days.textContent = days;
         refField.hours.textContent = hours;
         refField.minutes.textContent = minutes;
@@ -69,8 +60,6 @@ function start() {
 function pad(value) {
     return String(value.toString().padStart(2, '0'));
 };
-
-
 function convertMs(ms) {
     // Number of milliseconds per unit of time
     const second = 1000;
